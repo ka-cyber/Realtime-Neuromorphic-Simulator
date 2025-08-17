@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Neuromorphic Spectrum Intelligence Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">Real-Time Neuromorphic Spectrum Intelligence Simulator</h1>
+            <div class="header__subtitle">
+                Live Federated Learning with Energy Harvesting | Real-Time Scientific Simulation Platform
+            </div>
+        </div>
+    </header>
+
+    <!-- Simulation Controls -->
+    <section class="simulation-controls">
+        <div class="container">
+            <div class="controls-row">
+                <button class="btn btn--primary" id="start-simulation">
+                    <span class="loading-spinner hidden" id="sim-spinner"></span>
+                    Start Simulation
+                </button>
+                <button class="btn btn--secondary" id="pause-simulation" disabled>Pause</button>
+                <button class="btn btn--outline" id="reset-simulation">Reset</button>
+                <div class="simulation-time">
+                    <span>Time: <span id="simulation-time">0.0s</span> / <span id="total-duration">300s</span></span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Live Dashboard -->
+            <section class="dashboard">
+                <h2 class="section-title">Live Performance Dashboard</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card" id="performance-card">
+                        <div class="metric-card__header">
+                            <h3 class="metric-card__title">Performance Score</h3>
+                            <div class="status-indicator" id="performance-status"></div>
+                        </div>
+                        <div class="metric-card__value" id="performance-score">0.0</div>
+                        <div class="metric-card__change" id="performance-change">+0.0</div>
+                    </div>
+                    
+                    <div class="metric-card" id="energy-card">
+                        <div class="metric-card__header">
+                            <h3 class="metric-card__title">Energy Efficiency</h3>
+                            <div class="status-indicator" id="energy-status"></div>
+                        </div>
+                        <div class="metric-card__value" id="energy-efficiency">0.0 pJ</div>
+                        <div class="metric-card__change" id="energy-change">+0.0</div>
+                    </div>
+                    
+                    <div class="metric-card" id="spectrum-card">
+                        <div class="metric-card__header">
+                            <h3 class="metric-card__title">Spectrum Utilization</h3>
+                            <div class="status-indicator" id="spectrum-status"></div>
+                        </div>
+                        <div class="metric-card__value" id="spectrum-utilization">0.0%</div>
+                        <div class="metric-card__change" id="spectrum-change">+0.0</div>
+                    </div>
+                    
+                    <div class="metric-card" id="adversarial-card">
+                        <div class="metric-card__header">
+                            <h3 class="metric-card__title">Active Nodes</h3>
+                            <div class="status-indicator" id="nodes-status"></div>
+                        </div>
+                        <div class="metric-card__value" id="active-nodes">1000</div>
+                        <div class="metric-card__change" id="nodes-change">+0</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Real-Time Configuration Panel -->
+            <section class="configuration">
+                <h2 class="section-title">Real-Time Configuration Panel</h2>
+                <div class="config-grid">
+                    <div class="config-section">
+                        <h3 class="config-section__title">Network Parameters</h3>
+                        <div class="form-group">
+                            <label class="form-label">Number of Nodes</label>
+                            <input type="range" class="form-control" id="num-nodes" min="100" max="2000" step="100" value="1000">
+                            <span class="range-value" id="nodes-value">1000</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Simulation Duration (s)</label>
+                            <input type="range" class="form-control" id="sim-duration" min="60" max="600" step="30" value="300">
+                            <span class="range-value" id="duration-value">300s</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Neuromorphic Type</label>
+                            <select class="form-control" id="neuromorphic-type">
+                                <option value="snn" selected>Spiking Neural Network</option>
+                                <option value="memristor">Memristor Network</option>
+                                <option value="hybrid">Hybrid SNN-Memristor</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="config-section">
+                        <h3 class="config-section__title">Energy Sources</h3>
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="triboelectric" checked>
+                                    Triboelectric (5 mW/m²)
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="rf-harvesting" checked>
+                                    RF Harvesting (85% eff.)
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="ionic-wind">
+                                    Ionic Wind (2-8 mW/m²)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Learning Rate</label>
+                            <input type="range" class="form-control" id="learning-rate" min="0.001" max="0.1" step="0.001" value="0.01">
+                            <span class="range-value" id="learning-rate-value">0.01</span>
+                        </div>
+                    </div>
+
+                    <div class="config-section">
+                        <h3 class="config-section__title">Adversarial Settings</h3>
+                        <div class="form-group">
+                            <label class="form-label">Adversarial Ratio</label>
+                            <input type="range" class="form-control" id="adversarial-ratio" min="0" max="50" step="5" value="30">
+                            <span class="range-value" id="adversarial-value">30%</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Attack Types</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="jamming" checked>
+                                    Jamming Attacks
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="spoofing" checked>
+                                    Spoofing Attacks
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="byzantine">
+                                    Byzantine Faults
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Real-time Visualization -->
+            <section class="visualization">
+                <h2 class="section-title">Real-Time Visualization</h2>
+                <div class="chart-tabs">
+                    <button class="tab-btn active" data-chart="performance">Performance</button>
+                    <button class="tab-btn" data-chart="learning">Learning Accuracy</button>
+                    <button class="tab-btn" data-chart="spectrum">Spectrum Usage</button>
+                    <button class="tab-btn" data-chart="energy">Energy Analysis</button>
+                </div>
+                
+                <div class="chart-container" id="performance-chart" style="position: relative; height: 400px;">
+                    <canvas id="performance-canvas"></canvas>
+                </div>
+                
+                <div class="chart-container hidden" id="learning-chart" style="position: relative; height: 400px;">
+                    <canvas id="learning-canvas"></canvas>
+                </div>
+                
+                <div class="chart-container hidden" id="spectrum-chart" style="position: relative; height: 400px;">
+                    <canvas id="spectrum-canvas"></canvas>
+                </div>
+                
+                <div class="chart-container hidden" id="energy-chart" style="position: relative; height: 400px;">
+                    <canvas id="energy-canvas"></canvas>
+                </div>
+            </section>
+
+            <!-- Node Status Grid -->
+            <section class="node-status">
+                <h2 class="section-title">Live Node Status</h2>
+                <div class="node-controls">
+                    <div class="form-group">
+                        <label class="form-label">Filter by Status:</label>
+                        <select class="form-control" id="node-filter">
+                            <option value="all">All Nodes</option>
+                            <option value="active">Active Only</option>
+                            <option value="inactive">Inactive Only</option>
+                            <option value="adversarial">Adversarial Only</option>
+                        </select>
+                    </div>
+                    <div class="node-stats">
+                        <span class="node-stat">Active: <span id="active-count">0</span></span>
+                        <span class="node-stat">Inactive: <span id="inactive-count">0</span></span>
+                        <span class="node-stat">Adversarial: <span id="adversarial-count">0</span></span>
+                    </div>
+                </div>
+                <div class="node-grid" id="node-grid">
+                    <!-- Nodes will be dynamically generated -->
+                </div>
+            </section>
+
+            <!-- Export Panel -->
+            <section class="export-panel">
+                <h2 class="section-title">Export Current Data</h2>
+                <div class="export-actions">
+                    <button class="btn btn--secondary" id="export-json">
+                        <span>📄</span> Export JSON Data
+                    </button>
+                    <button class="btn btn--secondary" id="export-csv">
+                        <span>📊</span> Export CSV Timeline
+                    </button>
+                    <button class="btn btn--secondary" id="export-nodes">
+                        <span>🔗</span> Export Node Data
+                    </button>
+                    <button class="btn btn--outline" id="export-config">
+                        <span>⚙️</span> Export Configuration
+                    </button>
+                </div>
+                <div class="export-info">
+                    <p>Export files contain current simulation state and real-time data.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="container">
+            <div class="status-info">
+                <span class="status-item">Status: <span id="sim-status" class="status--info">Ready</span></span>
+                <span class="status-item">WebSocket: <span id="ws-status" class="status--success">Connected</span></span>
+                <span class="status-item">Updates/sec: <span id="update-rate">0</span></span>
+                <span class="status-item">Memory: <span id="memory-usage">45.2 MB</span></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
