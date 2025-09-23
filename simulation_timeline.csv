@@ -1,3 +1,4 @@
+1000 NODES AT 30% Adversarial Ratio
 Timestamp,Performance_Score,Learning_Accuracy,Spectrum_Utilization,Energy_Efficiency,Adversarial_Impact,Throughput_Mbps,Active_Nodes,Spike_Rate,Energy_Harvested_uJ
 1,61.09,0.5029,0.4119,33.00,0.2307,17.77,898,8.92,5.3129
 2,60.87,0.4992,0.4377,33.14,0.2372,18.89,904,9.32,5.6180
