@@ -1,0 +1,6 @@
+"Time (s)","Configuration","Performance Score","Energy Efficiency (pJ)","Spectrum Utilization (%)","Active Nodes","Adversarial Nodes"
+"0","Initial State","0.0","23.6","0.0","1000","329"
+"8","SNN Running","61.2","33.0","43.1","898","329"
+"11","500 Nodes","61.0","29.6","39.5","449","296"
+"13","1000 Nodes Restored","61.2","33.1","40.1","903","318"
+"19","Steady State","61.2","33.1","52.9","895","318"
